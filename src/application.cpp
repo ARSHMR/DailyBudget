@@ -8,6 +8,8 @@
 #define RIGHTW 43
 #define PRECISION 2
 
+#define RELEASEFILE "C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data/report.doc"
+
 /******************************************************************************
  \brief Init application and get ready to run.
  *****************************************************************************/
@@ -29,7 +31,11 @@ void application::Init()
   if (month.currentDay == 1)
   {
     std::cout << "Update budget\n";
+#if _DEBUG
     OpenFile("data/budget.json");
+#else
+    OpenFile("x64/Release/data/budget.json");
+#endif
     pause();
   }
   else
@@ -53,7 +59,7 @@ void application::Init()
 #if _DEBUG
   initStream.copyAndRenameFile(filename, "data", "Transactions.csv");
 #else
-  initStream.copyAndRenameFile(filename, "x64/Release/data", "Transactions.csv");
+  initStream.copyAndRenameFile(filename, "C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data", "Transactions.csv");
 #endif
 
 #endif
@@ -95,7 +101,11 @@ void application::UpdateBudget()
   if (res == 'n' || res == 'N') return;
   else
   {
+#if _DEBUG
     std::fstream file("data/budget.json");
+#else
+    std::fstream file("x64/Release/data/budget.json");
+#endif
     json data;
 
     if (!file.is_open()) return;
@@ -138,7 +148,11 @@ void application::UpdateBudget()
 
     file.close();
 
+#if _DEBUG
     std::ofstream outFile("data/budget.json");
+#else
+    std::ofstream outFile("x64/Release/data/budget.json");
+#endif
 
     if (!outFile.is_open()) return;
 
@@ -402,18 +416,17 @@ void application::RUNAlexReport()
 #if _DEBUG
   outfile.open("data/report.doc");
 #else
-  outfile.open("x64/Release/data/report.doc");
+  outfile.open(RELEASEFILE);
 #endif
 
   if (!outfile.is_open()) return;
 
   AlexReport(outfile);
 
-
 #if _DEBUG
   OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/data/report.doc");
 #else
-  OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data/report.doc");
+  OpenFileWord(RELEASEFILE);
 #endif
 }
 
