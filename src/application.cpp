@@ -411,9 +411,9 @@ void application::RUNAlexReport()
 
 
 #if _DEBUG
-  OpenFileWord("data/report.doc");
+  OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/data/report.doc");
 #else
-  OpenFileWord("x64/Release/data/report.doc");
+  OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data/report.doc");
 #endif
 }
 
@@ -438,9 +438,9 @@ void application::RUNAllieReport()
 
 
 #if _DEBUG
-  OpenFileWord("data/AllieReport.doc");
+  OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/data/AllieReport.doc");
 #else
-  OpenFileWord("x64/Release/data/AllieReport.doc");
+  OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data/AllieReport.doc");
 #endif
 }
 
