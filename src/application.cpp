@@ -281,18 +281,18 @@ void application::AlexReport(std::ofstream &file)
     if (output < 10.0f && name != "Entertainment - Books")
     {
       if (output < 0.0f)
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
       else if (output < -10.0f)
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
       else if (output < -100.0f)
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 7) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 7) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
       else
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 4) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 4) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
     }
     else if(name == "Entertainment - Books" || output < 100.0f)
-      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
     else
-      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
   }
 
   file << "---------------------------------------------------------------\n";
