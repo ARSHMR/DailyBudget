@@ -1,0 +1,11 @@
+.vs
+.git
+dailybudget.vcxproj
+dailybudget.vcxproj.filters
+dailybudget.vcxproj.user
+x64
+data/AllieReport.doc
+data/AllieReport.txt
+data/report.txt
+data/Transactions.csv
+data/report.doc
