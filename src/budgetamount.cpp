@@ -9,11 +9,21 @@ void BudgetAmount::LoadBudgetAmount()
 
   while (begin != end)
   {
-    int value = (float)begin.value() * 100;
+    std::string bname = begin.key();
 
-    std::string name = begin.key();
+    auto begin2 = begin.value().begin();
+    auto end2 = begin.value().end();
 
-    budgetAmount.emplace(name, value);
+    while (begin2 != end2)
+    {
+      std::string name = begin2.key();
+      int value = (float)begin2.value() * 100;
+
+      budgetAmount.emplace(name, value);
+
+      ++begin2;
+    }
+
 
     ++begin;
   }

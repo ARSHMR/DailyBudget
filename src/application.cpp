@@ -102,63 +102,10 @@ void application::UpdateBudget()
   else
   {
 #if _DEBUG
-    std::fstream file("data/budget.json");
+    OpenFile("data/budget.json");
 #else
-    std::fstream file("x64/Release/data/budget.json");
+    OpenFile("x64/Release/data/budget.json");
 #endif
-    json data;
-
-    if (!file.is_open()) return;
-
-    file >> data;
-
-    bool status = true;
-
-    while (status)
-    {
-      std::string category;
-      float amount = 0.0f;
-
-      std::cin.ignore();
-
-      std::cout << "Enter Label name: ";
-      std::getline(std::cin, category);
-
-      std::cout << "Enter amount ($): ";
-      std::cin >> amount;
-
-      if (!data.contains(category))
-      {
-        std::cout << "Label was not found in budget.\n";
-
-        continue;
-      }
-
-      data.at(category) = amount;
-
-      std::cout << "Update another label? ['y','n']:";
-      std::cin.ignore();
-
-      response = std::getchar();
-      res = static_cast<char>(response);
-
-      if (res == 'N' || res == 'n')
-        status = false;
-    }
-
-    file.close();
-
-#if _DEBUG
-    std::ofstream outFile("data/budget.json");
-#else
-    std::ofstream outFile("x64/Release/data/budget.json");
-#endif
-
-    if (!outFile.is_open()) return;
-
-    outFile << std::setw(2) << data;
-
-    outFile.close();
   }
 }
 
