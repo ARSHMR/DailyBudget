@@ -1,6 +1,6 @@
 {
   "Income": {
-    "DoorDash": 73.47,
+    "DoorDash": 167.19,
     "From Savings 1": 0,
     "From Savings 2": 0,
     "General Income": 0,
@@ -12,7 +12,6 @@
     "Selling Stuff": 82.0,
     "Unplanned Income": 13.11
   },
-  
   "Expenses": {
     "1-09 Direct Loan": 0,
     "1-10 Direct Loan": 623.0,
@@ -22,7 +21,7 @@
     "Amelia - Fun": 100.0,
     "Auto Fuel": 350.0,
     "Auto Insurance": 0,
-    "Auto Maintenance": 0,
+    "Auto Maintenance": 8.0,
     "BECU Credit Card": 118.0,
     "Charity": 28.95,
     "Clothing": 100.0,
@@ -55,7 +54,7 @@
     "Honda Passport": 369.37,
     "Internet": 40.0,
     "Life Insurance": 0,
-    "Maintenance": 8.0,
+    "Maintenance": 0,
     "Medical Bills": 0,
     "Medicine/Vitamins": 0,
     "Miscellaneous": 100.0,
@@ -63,8 +62,8 @@
     "Movies": 0,
     "Pets - Health": 0,
     "Phone": 80.0,
-    "RC Naval Combat": 88.11,
-    "Restaurants": 0,
+    "RC Naval Combat": 181.83,
+    "Restaurants": 0.00,
     "Sallie Mae": 267.63,
     "Savings Account": 0,
     "Snacks": 10.0,
