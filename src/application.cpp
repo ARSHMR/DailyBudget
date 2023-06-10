@@ -8,6 +8,8 @@
 #define RIGHTW 43
 #define PRECISION 2
 
+#define RELEASEFILE "C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data/report.doc"
+
 /******************************************************************************
  \brief Init application and get ready to run.
  *****************************************************************************/
@@ -29,7 +31,11 @@ void application::Init()
   if (month.currentDay == 1)
   {
     std::cout << "Update budget\n";
+#if _DEBUG
     OpenFile("data/budget.json");
+#else
+    OpenFile("x64/Release/data/budget.json");
+#endif
     pause();
   }
   else
@@ -53,7 +59,7 @@ void application::Init()
 #if _DEBUG
   initStream.copyAndRenameFile(filename, "data", "Transactions.csv");
 #else
-  initStream.copyAndRenameFile(filename, "x64/Release/data", "Transactions.csv");
+  initStream.copyAndRenameFile(filename, "C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data", "Transactions.csv");
 #endif
 
 #endif
@@ -95,56 +101,11 @@ void application::UpdateBudget()
   if (res == 'n' || res == 'N') return;
   else
   {
-    std::fstream file("data/budget.json");
-    json data;
-
-    if (!file.is_open()) return;
-
-    file >> data;
-
-    bool status = true;
-
-    while (status)
-    {
-      std::string category;
-      float amount = 0.0f;
-
-      std::cin.ignore();
-
-      std::cout << "Enter Label name: ";
-      std::getline(std::cin, category);
-
-      std::cout << "Enter amount ($): ";
-      std::cin >> amount;
-
-      if (!data.contains(category))
-      {
-        std::cout << "Label was not found in budget.\n";
-
-        continue;
-      }
-
-      data.at(category) = amount;
-
-      std::cout << "Update another label? ['y','n']:";
-      std::cin.ignore();
-
-      response = std::getchar();
-      res = static_cast<char>(response);
-
-      if (res == 'N' || res == 'n')
-        status = false;
-    }
-
-    file.close();
-
-    std::ofstream outFile("data/budget.json");
-
-    if (!outFile.is_open()) return;
-
-    outFile << std::setw(2) << data;
-
-    outFile.close();
+#if _DEBUG
+    OpenFile("data/budget.json");
+#else
+    OpenFile("x64/Release/data/budget.json");
+#endif
   }
 }
 
@@ -281,18 +242,18 @@ void application::AlexReport(std::ofstream &file)
     if (output < 10.0f && name != "Entertainment - Books")
     {
       if (output < 0.0f)
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
       else if (output < -10.0f)
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
       else if (output < -100.0f)
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 7) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 7) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
       else
-        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 4) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+        file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 4) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
     }
     else if(name == "Entertainment - Books" || output < 100.0f)
-      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 5) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
     else
-      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << "/$" << labelSpent << std::endl;
+      file << std::left << std::setw(LEFTW) << entry.first << std::right << std::setw(RIGHTW - 6) << std::fixed << std::setprecision(PRECISION) << "$" << output << std::endl;
   }
 
   file << "---------------------------------------------------------------\n";
@@ -402,18 +363,17 @@ void application::RUNAlexReport()
 #if _DEBUG
   outfile.open("data/report.doc");
 #else
-  outfile.open("x64/Release/data/report.doc");
+  outfile.open(RELEASEFILE);
 #endif
 
   if (!outfile.is_open()) return;
 
   AlexReport(outfile);
 
-
 #if _DEBUG
   OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/data/report.doc");
 #else
-  OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data/report.doc");
+  OpenFileWord(RELEASEFILE);
 #endif
 }
 
