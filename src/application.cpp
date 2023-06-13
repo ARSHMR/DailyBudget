@@ -287,7 +287,14 @@ void application::AlexReport(std::ofstream &file)
   }
   file << "\n";
 
-  float ProjectedSpent = (spentToday / (month.currentDay - 1)) * month.totalDays;
+  int divisor = month.currentDay - 1;
+  float ProjectedSpent = 0.0f;
+
+  if (divisor != 0)
+    ProjectedSpent = (spentToday / (month.currentDay - 1)) * month.totalDays;
+  else
+    ProjectedSpent = (spentToday / month.currentDay) * month.totalDays;
+
   float ProjectedEndOfMonth = (totalBudgetAmount / 100.0f) - ProjectedSpent;
 
   file << "Estimated Total Spent: $" << std::fixed << std::setprecision(PRECISION) << std::left << std::setw(7) << ProjectedSpent << std::endl;
@@ -396,12 +403,31 @@ void application::RUNAllieReport()
 
   AllieReport(outfile);
 
-
 #if _DEBUG
   OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/data/AllieReport.doc");
 #else
   OpenFileWord("C:/PersonalProjects/dailybudget/DailyBudget/x64/Release/data/AllieReport.doc");
 #endif
+}
+
+/******************************************************************************
+ * Calculates the daily budget.
+ *  0) daily - default.
+ *  1) weekly.
+ *  2) bi-weekly.
+ *
+ * \param BudgetToday
+ * \param frequency
+ * \return
+ *****************************************************************************/
+float AppMath::BudgetOutput(const int BudgetToday, const int frequency)
+{
+  months month;
+  month.Init();
+
+  int DayMultiplier = AppMath::GetDayMultiplier(frequency);
+
+  return ((BudgetToday * DayMultiplier) / month.totalDays) / 100.0f;
 }
 
 /******************************************************************************
@@ -448,24 +474,4 @@ int AppMath::GetDayMultiplier(const int frequency)
   }
 
   return 0;
-}
-
-/******************************************************************************
- * Calculates the daily budget.
- *  0) daily - default.
- *  1) weekly.
- *  2) bi-weekly.
- * 
- * \param BudgetToday
- * \param frequency
- * \return 
- *****************************************************************************/
-float AppMath::BudgetOutput(const int BudgetToday, const int frequency)
-{
-  months month;
-  month.Init();
-
-  int DayMultiplier = AppMath::GetDayMultiplier(frequency);
-
-  return ((BudgetToday * DayMultiplier) / month.totalDays) / 100.0f;
 }
