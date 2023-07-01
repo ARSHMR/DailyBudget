@@ -123,12 +123,31 @@ void application::RUN()
 
 void application::CalculateTotalBudgetAmount()
 {
-  for (auto item: budget.budgetAmount)
-  {
-    totalBudgetAmount += item.second;
-  }
+  str BudgetStream;
+  BudgetStream.LoadJSONData("data/budget.json");
 
-  totalBudgetAmount /= 2;
+  auto begin = BudgetStream.begin();
+  auto end = BudgetStream.end();
+
+  while (begin != end)
+  {
+    std::string catagory = begin.key();
+
+    if (catagory == "Income")
+    {
+      auto begin1 = begin.value().begin();
+      auto end2 = begin.value().end();
+
+      while (begin1 != end2)
+      {
+        totalBudgetAmount += begin1.value() * 100;
+
+        ++begin1;
+      }
+    }
+
+    ++begin;
+  }
 }
 
 void application::CalculateTotalSpentAmount()
