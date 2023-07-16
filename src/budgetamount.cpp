@@ -24,7 +24,6 @@ void BudgetAmount::LoadBudgetAmount()
       ++begin2;
     }
 
-
     ++begin;
   }
 }
