@@ -26,6 +26,12 @@ double tran::GetCatagoryTotal(const std::string& filename, const std::string& ca
       size_t amountSize = amountStr.size();
       std::string numAmount = amountStr.substr(1, amountSize - 2);
 
+      if (category == "Home Maintenance")
+      {
+        int x = 10;
+      }
+
+
       if (categoryName == category) {
         try
         {

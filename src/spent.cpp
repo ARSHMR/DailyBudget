@@ -12,17 +12,21 @@ void spent::LoadAmountSpent()
 
   while (begin != end)
   {
-    auto BeginL2 = begin.value().begin();
-    auto EndL2 = begin.value().end();
-
-    while (BeginL2 != EndL2)
+    if (begin.key() == "Expenses")
     {
-      std::string name = BeginL2.key();
-      int value = spending.GetCatagoryTotal("data/Transactions.csv", name) * 100;
+      auto BeginL2 = begin.value().begin();
+      auto EndL2 = begin.value().end();
 
-      spent.emplace(name, value);
+      while (BeginL2 != EndL2)
+      {
+        std::string name = BeginL2.key();
+        int value = spending.GetCatagoryTotal("data/Transactions.csv", name) * 100;
 
-      ++BeginL2;
+        spent.emplace(name, value);
+
+        ++BeginL2;
+      }
+
     }
 
     ++begin;

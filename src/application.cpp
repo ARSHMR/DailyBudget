@@ -154,10 +154,7 @@ void application::CalculateTotalSpentAmount()
 {
   for (auto item : Spent.spent)
   {
-    if (item.second < 0)
-    {
-      totalSpentAmount += item.second;
-    }
+    totalSpentAmount += item.second;
   }
 }
 
